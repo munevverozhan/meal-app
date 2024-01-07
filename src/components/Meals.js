@@ -1,25 +1,43 @@
-import { useEffect, useState } from "react"
+import React, { useEffect, useState } from "react"
 import { useContextProvider } from "../context"
-import {share} from "../share"
+import { share } from "../share"
 
 
 const Meals = () => {
     const context = useContextProvider()
-    console.log(context)
     const [data, setData] = useState()
+    const allMealsUrl = 'api/json/v1/1/search.php'
+    const randomMealUrl='api/json/v1/1/random.php'
+
+   
+    const fetchData = async () => {
+        try {
+            const response = await share.get(randomMealUrl)
+            setData(response)
+            console.log(data)
+        } catch (error) {
+            console.log(error)
+        }
+    }
 
     useEffect(() => {
-        share.get('https://api.tomorrow.io/v4/weather/forecast?location=42.3478,-71.0466&').then((response) => setData(response))
+        fetchData()
     }, [])
-    console.log(data?.data?.timelines?.daily)
+    console.log(data?.data?.results)
     return (
         <>
             <h1>Meals</h1>
-           {
-            (data?.data?.timelines?.daily)?.map(item =>{
-               return <li key={(item.time)}>{Object.entries(item.values).map(item =>{return <li key={item.time}>{item}</li>}) }</li>
-            })
-           } 
+            {
+                (data?.data?.results)?.map((item, index) => {
+                    return <React.Fragment key={index}>
+                        <div> Name: {item.name.first}</div>
+                        <div>Age: {item.dob.age}</div>
+                        <div>Email: {item.email}</div>
+                        <div>Picture: {item.picture.large}</div>
+                        <div>Phone: {item.phone}</div>
+                    </React.Fragment>
+                })
+            }
         </>
     )
 }
