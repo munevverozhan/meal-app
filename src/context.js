@@ -1,4 +1,4 @@
-import { createContext, useContext, useState ,useEffect} from 'react'
+import { createContext, useContext, useState, useEffect } from 'react'
 import { share } from "./share"
 const allMealsUrl = 'search.php?s=k'
 const randomMealUrl = 'random.php'
@@ -8,14 +8,22 @@ export const context = createContext();
 
 const Provider = ({ children }) => {
     const [meals, setMeals] = useState([])
-   
+    const [loading, setLoading] = useState(false)
+
     const fetchMeals = async (url) => {
+        setLoading(true)
         try {
-            const response = await share.get(url)
-            setMeals(response)
+            const response = await share.get(url);
+            if (response?.data?.meals) {
+                setMeals(response);
+            }
+            else{
+                setMeals([])
+            }
         } catch (error) {
             console.log(error)
         }
+        setLoading(false)
     }
 
     useEffect(() => {
@@ -24,7 +32,7 @@ const Provider = ({ children }) => {
 
     return (
         <>
-            <context.Provider value={{meals}}>
+            <context.Provider value={{ meals, loading }}>
                 {children}
             </context.Provider>
         </>
