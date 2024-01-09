@@ -7,10 +7,14 @@
 }
 
 .header {
-  margin: 5rem 10rem 2rem 10rem;
   display: flex;
   align-items: center;
-  gap: 2rem;
+}
+
+.header form {
+  display: flex;
+  flex-wrap: wrap;
+  gap: .5rem;
 }
 
 .container {
@@ -61,6 +65,45 @@ h3 {
   cursor: pointer;
 }
 
+.MuiBox-root {
+  position: absolute;
+  top: 20%;
+  left: 25%;
+  width: 80vw;
+  max-width: 800px;
+  height: 350px;
+  padding: 3rem;
+  background: linear-gradient(176deg, rgb(255 195 192 / 72%), rgb(19 103 142 / 91%));
+  border-radius: 8px;
+  overflow: scroll;
+
+}
+
+.css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
+  background-color: rgb(0 0 0 / 83%) !important;
+}
+
+#modal-title {
+  display: flex;
+  justify-content: space-between;
+  text-transform: uppercase;
+  font-size: 40px;
+  color: rgb(6, 54, 135);
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  font-weight: 700;
+  align-items: center;
+}
+#modal-description{
+  font-size: 20px;
+  font-family:Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+  line-height: 2rem;
+}
+.modal-close-btn{
+  height: 35px;
+}
+.modal-close-btn:hover{
+  background-color: rgb(203, 50, 50) !important;
+}
 .loader {
   position: relative;
   width: 48px;
@@ -86,9 +129,6 @@ h3 {
 @media screen and (min-width:150px) {
   .header {
     margin: 1rem;
-    flex-direction: column;
-    flex-wrap: wrap;
-    gap: 1rem;
   }
 
   .favorites-container {
@@ -103,8 +143,8 @@ h3 {
 
 @media screen and (min-width:786px) {
   .header {
-    margin: 5rem 3rem 3rem 3rem;
     flex-direction: row;
+    margin: 5rem;
   }
 
   .favorites-container {
@@ -117,6 +157,10 @@ h3 {
 }
 
 @media screen and (min-width:1243px) {
+  .header {
+    margin: 5rem;
+  }
+
   .favorites-container {
     height: 250px;
   }

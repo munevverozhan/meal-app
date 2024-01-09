@@ -1,15 +1,18 @@
 import Favorites from "./components/Favorites";
 import Meals from "./components/Meals";
-import Search from "./components/Search";
-import Modal from "./components/Modal";
+import ModalComponent from "./components/ModalComponent";
+import SearchComponent from "./components/SearchComponent";
+import { useGlobalContext } from "./context";
 
 function App() {
+  const { showModal } = useGlobalContext()
   return (
     <>
-      {/* <Search />
+      <SearchComponent />
+      {/* 
       <Favorites /> */}
       <Meals />
-      {/* <Modal /> */}
+      {showModal && <ModalComponent />}
     </>
   );
 }

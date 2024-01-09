@@ -1,23 +1,14 @@
-import { useContextProvider } from "../context"
-import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, IconButton, Skeleton, TextField, Typography } from "@mui/material"
+import { useGlobalContext } from "../context"
+import { Card, CardActions, CardHeader, CardMedia, IconButton } from "@mui/material"
 import FavoriteIcon from "@mui/icons-material/Favorite"
-import AutoAwesomeIcon from '@mui/icons-material/AutoAwesome';
-
 import '../assets/style.css'
-import { Search } from "@mui/icons-material"
-
 
 const Meals = () => {
-    const { meals, loading } = useContextProvider()
-
+    const { meals, loading, selectMeal } = useGlobalContext()
+    console.log(meals)
     console.log(loading)
     return (
         <>
-            <div className="header">
-                <TextField id="outlined-basic" label="Search meal" variant="outlined" />
-                <Button variant="contained" startIcon={<Search />}>SEARCH</Button>
-                <Button variant="contained" startIcon={<AutoAwesomeIcon />}>SUPRISE ME!</Button>
-            </div>
             <div className="favorites-container">
                 <h3>Favorites</h3>
                 <h3>Favorites</h3>
@@ -38,6 +29,7 @@ const Meals = () => {
                                             sx={{ height: 200 }}
                                             image={item.strMealThumb}
                                             title={item.strMeal}
+                                            onClick={() => selectMeal(item.idMeal)}
                                         />
 
                                         <CardActions>

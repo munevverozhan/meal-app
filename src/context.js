@@ -1,14 +1,17 @@
 import { createContext, useContext, useState, useEffect } from 'react'
 import { share } from "./share"
-const allMealsUrl = 'search.php?s=k'
+const allMealsUrl = 'search.php?s='
 const randomMealUrl = 'random.php'
-
 
 export const context = createContext();
 
 const Provider = ({ children }) => {
     const [meals, setMeals] = useState([])
     const [loading, setLoading] = useState(false)
+    const [searchTerm, setSearchTerm] = useState('')
+    const [showModal, setShowModal] = useState(false)
+    const [selectedMeal, setSelectedMeal] = useState(null)
+    const [favorites,setFavorites]=useState([])
 
     const fetchMeals = async (url) => {
         setLoading(true)
@@ -17,7 +20,7 @@ const Provider = ({ children }) => {
             if (response?.data?.meals) {
                 setMeals(response);
             }
-            else{
+            else {
                 setMeals([])
             }
         } catch (error) {
@@ -30,16 +33,38 @@ const Provider = ({ children }) => {
         fetchMeals(allMealsUrl)
     }, [])
 
+    useEffect(() => {
+        if (!searchTerm) return
+        fetchMeals(`${allMealsUrl}${searchTerm}`)
+    }, [searchTerm])
+
+    const setSearchTermFunction = (text) => {
+        setSearchTerm(text)
+    }
+    const fetchRandomMeal = () => {
+        fetchMeals(randomMealUrl)
+    }
+    const selectMeal = (idMeal, favoriteMeal) => {
+        let meal;
+        meal = (meals?.data?.meals).find((meal) => meal.idMeal === idMeal)
+        setSelectedMeal(meal)
+        setShowModal(true)
+        console.log(meal)
+    }
+    const handleClose = () => {
+        setShowModal(false)
+    }
+
     return (
         <>
-            <context.Provider value={{ meals, loading }}>
+            <context.Provider value={{ meals, loading, setSearchTermFunction, fetchRandomMeal, showModal, selectMeal, selectedMeal ,handleClose}}>
                 {children}
             </context.Provider>
         </>
     )
 }
 
-export const useContextProvider = () => {
+export const useGlobalContext = () => {
     return useContext(context)
 }
 
