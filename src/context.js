@@ -4,6 +4,16 @@ const allMealsUrl = 'search.php?s='
 const randomMealUrl = 'random.php'
 
 export const context = createContext();
+const getFavoritesFromLocalStorage = () => {
+    let favorites = localStorage.getItem('favorites')
+    if (favorites) {
+        favorites = JSON.parse(localStorage.getItem('favorites'))
+    }
+    else {
+        favorites = []
+    }
+    return favorites
+}
 
 const Provider = ({ children }) => {
     const [meals, setMeals] = useState([])
@@ -11,7 +21,7 @@ const Provider = ({ children }) => {
     const [searchTerm, setSearchTerm] = useState('')
     const [showModal, setShowModal] = useState(false)
     const [selectedMeal, setSelectedMeal] = useState(null)
-    const [favorites,setFavorites]=useState([])
+    const [favorites, setFavorites] = useState(getFavoritesFromLocalStorage())
 
     const fetchMeals = async (url) => {
         setLoading(true)
@@ -46,7 +56,11 @@ const Provider = ({ children }) => {
     }
     const selectMeal = (idMeal, favoriteMeal) => {
         let meal;
-        meal = (meals?.data?.meals).find((meal) => meal.idMeal === idMeal)
+        if (favoriteMeal) {
+            meal = favorites.find((meal) => meal.idMeal === idMeal)
+        } else {
+            meal = (meals?.data?.meals).find((meal) => meal.idMeal === idMeal)
+        }
         setSelectedMeal(meal)
         setShowModal(true)
         console.log(meal)
@@ -55,9 +69,38 @@ const Provider = ({ children }) => {
         setShowModal(false)
     }
 
+    const changeBtnColor = () => {
+        const favIcons = document.querySelectorAll('#fav-icon')
+        for (const icon of favIcons) {
+            icon.addEventListener('click', () => {
+                icon.style.color = 'red';
+            })
+        }
+    }
+
+    const addToFavorites = (idMeal) => {
+        const meal = (meals?.data?.meals).find((meal) => meal.idMeal === idMeal)
+        const alreadyFavorite = favorites.find((meal) => meal.idMeal === idMeal)
+        if (alreadyFavorite) return
+        const updateFavorites = [...favorites, meal]
+        setFavorites(updateFavorites)
+        localStorage.setItem('favorites', JSON.stringify(updateFavorites))
+        changeBtnColor()
+    }
+
+    const deleteFavorite = (idMeal) => {
+        const updateFavorites = favorites.filter((meal) => meal.idMeal !== idMeal)
+        setFavorites(updateFavorites)
+        localStorage.setItem('favorites', JSON.stringify(updateFavorites))
+    }
+    console.log('fav', favorites)
+
+
+
+
     return (
         <>
-            <context.Provider value={{ meals, loading, setSearchTermFunction, fetchRandomMeal, showModal, selectMeal, selectedMeal ,handleClose}}>
+            <context.Provider value={{ meals, loading, setSearchTermFunction, fetchRandomMeal, showModal, selectMeal, selectedMeal, handleClose, addToFavorites, deleteFavorite, favorites }}>
                 {children}
             </context.Provider>
         </>

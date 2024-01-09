@@ -1,20 +1,14 @@
 import { useGlobalContext } from "../context"
-import { Card, CardActions, CardHeader, CardMedia, IconButton } from "@mui/material"
+import { Button, Card, CardActions, CardHeader, CardMedia, IconButton } from "@mui/material"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import '../assets/style.css'
+import { useEffect, useState } from "react"
 
 const Meals = () => {
-    const { meals, loading, selectMeal } = useGlobalContext()
-    console.log(meals)
-    console.log(loading)
+    const { meals, loading, selectMeal, addToFavorites, deleteFavorite } = useGlobalContext()
+   
     return (
         <>
-            <div className="favorites-container">
-                <h3>Favorites</h3>
-                <h3>Favorites</h3>
-
-            </div>
-
             {
                 loading ? <span className="loader"></span> :
                     <div className="container">
@@ -33,8 +27,8 @@ const Meals = () => {
                                         />
 
                                         <CardActions>
-                                            <IconButton>
-                                                <FavoriteIcon style={{ color: "white" }} />
+                                            <IconButton onClick={() => addToFavorites(item.idMeal)} >
+                                                <FavoriteIcon id="fav-icon" className="fav-btn-color-w" />
                                             </IconButton>
                                         </CardActions>
                                     </Card >
