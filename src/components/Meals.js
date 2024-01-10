@@ -5,9 +5,6 @@ import '../assets/style.css'
 
 const Meals = () => {
     const { meals, loading, selectMeal, addToFavorites } = useGlobalContext()
-    let favIcon = document.querySelector('#fav-icon')
-    favIcon.classList.add(' fav-btn-color-r')
-    console.log()
    
     return (
         <>

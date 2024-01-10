@@ -91,7 +91,7 @@ h3 {
   padding: 3rem;
   background: linear-gradient(176deg, rgb(255 195 192 / 72%), rgb(19 103 142 / 91%));
   border-radius: 8px;
-  overflow: scroll;
+  overflow-y: scroll;
 }
 
 .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
@@ -183,7 +183,7 @@ h3 {
 
   .favorites-container {
     width: auto;
-    overflow: scroll;
+    overflow-y: scroll;
     gap: 2rem;
   }
 
@@ -216,7 +216,7 @@ h3 {
 
   .favorites-container {
     width: auto;
-    overflow: scroll;
+    overflow-y: scroll;
     gap: 2rem;
   }
 

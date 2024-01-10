@@ -26,7 +26,7 @@ const SearchComponent = () => {
         <>
             <div className="header">
                 <form onSubmit={handleSubmit}>
-                    <TextField id="otulined-basic" type="text" value={text} onChange={handleChange} label="aranan yemek" variant="outlined"/>
+                    <TextField id="otulined-basic" type="text" value={text} onChange={handleChange} label="Search meal" variant="outlined"/>
                     <Button type="submit" variant="contained" startIcon={<Search/>}>SEARCH</Button>
                     <Button type="button" variant="contained" startIcon={<AutoAwesomeIcon />} onClick={handleRandomMeal}>SUPRISE ME!</Button>
                 </form>
