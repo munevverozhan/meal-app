@@ -28,7 +28,8 @@
 
 .main-con {
   position: relative;
-  height: 250px;
+  height: 220px;
+  width: 100%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -37,13 +38,18 @@
   font-family: 'Rubik Doodle Shadow', system-ui;
 
 }
-.main-con h1{
- margin-left: 40px;
+
+.main-con h1 {
+  margin-left: 40px;
 }
 
 .favorites-container {
   display: flex;
   align-items: center;
+  width: 100%;
+  flex-wrap: wrap;
+  margin: 1rem 2rem;
+
 }
 
 h3 {
@@ -72,10 +78,13 @@ h3 {
   cursor: pointer;
 }
 
+.mui-modal {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .MuiBox-root {
-  position: absolute;
-  top: 20%;
-  left: 25%;
   width: 80vw;
   max-width: 800px;
   height: 350px;
@@ -83,7 +92,6 @@ h3 {
   background: linear-gradient(176deg, rgb(255 195 192 / 72%), rgb(19 103 142 / 91%));
   border-radius: 8px;
   overflow: scroll;
-
 }
 
 .css-i9fmh8-MuiBackdrop-root-MuiModal-backdrop {
@@ -127,9 +135,9 @@ h3 {
 
 .fav-container {
   display: flex;
-  width: 150px;
+  height: 150px;
   flex-direction: column;
-  gap: 1rem;
+  gap: .5rem;
   justify-content: flex-start;
   align-items: center;
 }
@@ -162,15 +170,33 @@ h3 {
 
 @media screen and (min-width:150px) {
   .header {
-    margin: 1rem;
+    margin: 3rem;
+  }
+
+  .header form {
+    gap: 2rem;
   }
 
   .favorites-container {
-    height: 150px;
+    width: auto;
+    overflow: scroll;
+    gap: 2rem;
   }
 
   .container {
     margin: 1rem;
+  }
+
+  .MuiBox-root {
+    width: 350px;
+  }
+
+  #modal-title {
+    font-size: 20px;
+  }
+
+  #modal-description {
+    font-size: 15px;
   }
 }
 
@@ -180,12 +206,30 @@ h3 {
     margin: 5rem;
   }
 
+  .header form {
+    gap: 1rem;
+  }
+
   .favorites-container {
-    height: 200px;
+    width: auto;
+    overflow: scroll;
+    gap: 2rem;
   }
 
   .container {
     margin: 3rem;
+  }
+
+  .MuiBox-root {
+    width: 550px;
+  }
+
+  #modal-title {
+    font-size: 30px;
+  }
+
+  #modal-description {
+    font-size: 17px;
   }
 }
 
@@ -194,7 +238,18 @@ h3 {
     margin: 5rem;
   }
 
-  .favorites-container {
-    height: 250px;
+  .header form {
+    gap: .5rem;
   }
+
+  .MuiBox-root {
+    width: inherit;
+  }
+  #modal-title {
+    font-size: 40px;
+  }
+  #modal-description{
+    font-size: 20px;
+  }
+
 }

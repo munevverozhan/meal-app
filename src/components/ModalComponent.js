@@ -10,7 +10,7 @@ const ModalComponent = () => {
 
     return (
         <>
-            <Modal
+            <Modal className="mui-modal"
                 open={showModal}
                 aria-labelledby="modal-title"
                 aria-describedby="modal-description"

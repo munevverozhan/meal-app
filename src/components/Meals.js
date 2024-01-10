@@ -1,11 +1,10 @@
 import { useGlobalContext } from "../context"
-import { Button, Card, CardActions, CardHeader, CardMedia, IconButton } from "@mui/material"
+import { Card, CardActions, CardHeader, CardMedia, IconButton } from "@mui/material"
 import FavoriteIcon from "@mui/icons-material/Favorite"
 import '../assets/style.css'
-import { useEffect, useState } from "react"
 
 const Meals = () => {
-    const { meals, loading, selectMeal, addToFavorites, deleteFavorite } = useGlobalContext()
+    const { meals, loading, selectMeal, addToFavorites } = useGlobalContext()
    
     return (
         <>
