@@ -57,7 +57,7 @@ const Provider = ({ children }) => {
     const selectMeal = (idMeal, favoriteMeal) => {
         let meal;
         if (favoriteMeal) {
-            meal = favorites.find((meal) => meal.idMeal === idMeal)
+            meal = favorites.find((meal) => meal.idMeal === idMeal)    
         } else {
             meal = (meals?.data?.meals).find((meal) => meal.idMeal === idMeal)
         }
@@ -69,15 +69,6 @@ const Provider = ({ children }) => {
         setShowModal(false)
     }
 
-    const changeBtnColor = () => {
-        const favIcons = document.querySelectorAll('#fav-icon')
-        for (const icon of favIcons) {
-            icon.addEventListener('click', () => {
-                icon.style.color = 'red';
-            })
-        }
-    }
-
     const addToFavorites = (idMeal) => {
         const meal = (meals?.data?.meals).find((meal) => meal.idMeal === idMeal)
         const alreadyFavorite = favorites.find((meal) => meal.idMeal === idMeal)
@@ -85,7 +76,6 @@ const Provider = ({ children }) => {
         const updateFavorites = [...favorites, meal]
         setFavorites(updateFavorites)
         localStorage.setItem('favorites', JSON.stringify(updateFavorites))
-        changeBtnColor()
     }
 
     const deleteFavorite = (idMeal) => {
@@ -93,10 +83,6 @@ const Provider = ({ children }) => {
         setFavorites(updateFavorites)
         localStorage.setItem('favorites', JSON.stringify(updateFavorites))
     }
-    console.log('fav', favorites)
-
-
-
 
     return (
         <>

@@ -127,6 +127,10 @@ h3 {
   color: rgb(255, 255, 255);
 }
 
+.fav-btn-color-r{
+  color: rgb(180, 15, 15);
+}
+
 .fav-img-style {
   width: 60px;
   border-radius: 50%;

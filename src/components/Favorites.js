@@ -13,7 +13,7 @@ const Favorites = () => {
                     return (
                         <React.Fragment key={meal.idMeal}>
                             <div className="fav-container">
-                                <img src={meal.strMealThumb} alt="meal-img" className="fav-img-style " onClick={()=>selectMeal(meal.idMeal,true)}/>
+                                <img src={meal.strMealThumb} alt="meal-img" className="fav-img-style" onClick={()=>selectMeal(meal.idMeal,true)}/>
                                 <Button onClick={()=>deleteFavorite(meal.idMeal)} variant="contained" className="delete-btn">remove</Button>
                             </div>
                         </React.Fragment>
